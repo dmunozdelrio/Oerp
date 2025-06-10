@@ -10,14 +10,16 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
                         p_exchange_rate IN gl_header.glh_exchange_rate%TYPE,
                         p_glh_id        OUT gl_header.glh_id%TYPE) IS
     v_seq_name VARCHAR2(30);
+    v_doc_no   NUMBER;
   BEGIN
     SELECT 'SQ_DOC_' || p_doc_type INTO v_seq_name FROM gl_doc_types
       WHERE doc_type = p_doc_type;
 
-    EXECUTE IMMEDIATE 'SELECT ' || v_seq_name || '.NEXTVAL FROM dual' INTO p_glh_id;
+    SELECT sq_gl_header.NEXTVAL INTO p_glh_id FROM dual;
+    EXECUTE IMMEDIATE 'SELECT ' || v_seq_name || '.NEXTVAL FROM dual' INTO v_doc_no;
 
     INSERT INTO gl_header(glh_id, doc_type, doc_no, glh_exchange_rate, period_id, glh_state)
-    VALUES(p_glh_id, p_doc_type, p_glh_id, p_exchange_rate, p_period_id, 'N');
+    VALUES(p_glh_id, p_doc_type, v_doc_no, p_exchange_rate, p_period_id, 'N');
   EXCEPTION
     WHEN NO_DATA_FOUND THEN
       RAISE_APPLICATION_ERROR(-20001, 'Invalid DOC_TYPE');
