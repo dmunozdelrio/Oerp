@@ -59,6 +59,7 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
     v_debits NUMBER;
     v_credits NUMBER;
     v_doc_type gl_header.doc_type%TYPE;
+    v_count NUMBER;
   BEGIN
     SELECT SUM(NVL(debit_amount,0)), SUM(NVL(credit_amount,0))
       INTO v_debits, v_credits
@@ -69,7 +70,8 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
     END IF;
 
     SELECT doc_type INTO v_doc_type FROM gl_header WHERE glh_id = p_glh_id;
-    IF NOT EXISTS (SELECT 1 FROM gl_doc_types WHERE doc_type = v_doc_type) THEN
+    SELECT COUNT(*) INTO v_count FROM gl_doc_types WHERE doc_type = v_doc_type;
+    IF v_count = 0 THEN
       RAISE_APPLICATION_ERROR(-20007, 'Invalid DOC_TYPE');
     END IF;
   END validate_header;
