@@ -59,7 +59,9 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
     v_debits NUMBER;
     v_credits NUMBER;
     v_doc_type gl_header.doc_type%TYPE;
+    v_period_id gl_header.period_id%TYPE;
     v_count NUMBER;
+    v_status CHAR(1);
   BEGIN
     SELECT SUM(NVL(debit_amount,0)), SUM(NVL(credit_amount,0))
       INTO v_debits, v_credits
@@ -69,10 +71,43 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
       RAISE_APPLICATION_ERROR(-20006, 'Journal not balanced');
     END IF;
 
-    SELECT doc_type INTO v_doc_type FROM gl_header WHERE glh_id = p_glh_id;
+    SELECT doc_type, period_id INTO v_doc_type, v_period_id
+      FROM gl_header WHERE glh_id = p_glh_id;
     SELECT COUNT(*) INTO v_count FROM gl_doc_types WHERE doc_type = v_doc_type;
     IF v_count = 0 THEN
       RAISE_APPLICATION_ERROR(-20007, 'Invalid DOC_TYPE');
+    END IF;
+
+    SELECT status INTO v_status FROM gl_periods WHERE period_id = v_period_id;
+    IF v_status <> 'O' THEN
+      RAISE_APPLICATION_ERROR(-20010, 'Period closed');
+    END IF;
+
+    SELECT COUNT(*) INTO v_count
+      FROM gl_lines l
+     WHERE l.glh_id = p_glh_id
+       AND NOT EXISTS (SELECT 1 FROM gl_post_keys pk WHERE pk.key_id = l.post_key);
+    IF v_count > 0 THEN
+      RAISE_APPLICATION_ERROR(-20011, 'Invalid POST_KEY in lines');
+    END IF;
+
+    SELECT COUNT(*) INTO v_count
+      FROM gl_lines l
+      JOIN gl_post_keys pk ON pk.key_id = l.post_key
+     WHERE l.glh_id = p_glh_id
+       AND INSTR(pk.mandatory_fields, 'COST_CENTER') > 0
+       AND l.cost_center IS NULL;
+    IF v_count > 0 THEN
+      RAISE_APPLICATION_ERROR(-20012, 'Cost center missing');
+    END IF;
+
+    SELECT COUNT(*) INTO v_count
+      FROM gl_lines l
+     WHERE l.glh_id = p_glh_id
+       AND ((l.debit_amount IS NOT NULL AND l.debit_amount <= 0) OR
+            (l.credit_amount IS NOT NULL AND l.credit_amount <= 0));
+    IF v_count > 0 THEN
+      RAISE_APPLICATION_ERROR(-20013, 'Negative amounts found');
     END IF;
   END validate_header;
 
