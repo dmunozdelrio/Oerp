@@ -30,6 +30,7 @@
 -- 6. Triggers
 @triggers/tr_gl_header_log.sql
 @triggers/tr_gl_lines_log.sql
+@triggers/tr_gl_header_defaults.sql
 
 -- 7. Scheduler jobs
 @jobs/reverse_job.sql
