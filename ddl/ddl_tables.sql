@@ -13,7 +13,8 @@ CREATE TABLE gl_header (
     approval_date    DATE,
     period_id        NUMBER         NOT NULL,
     status           CHAR(1)        DEFAULT 'B',
-    tax_code         VARCHAR2(10)
+    tax_code         VARCHAR2(10),
+    tax_rate         NUMBER(5,2)
 );
 
 
@@ -124,6 +125,7 @@ COMMENT ON COLUMN gl_header.approval_date IS 'Fecha de aprobación';
 COMMENT ON COLUMN gl_header.period_id IS 'FK a gl_periods para el periodo contable';
 COMMENT ON COLUMN gl_header.status IS 'Estado: B= Borrador, A= Aprobado';
 COMMENT ON COLUMN gl_header.tax_code IS 'Código de impuesto asociado al encabezado';
+COMMENT ON COLUMN gl_header.tax_rate IS 'Tasa del impuesto copiada del catálogo';
 
 -- Tabla GL_LINES
 COMMENT ON TABLE gl_lines IS 'Líneas de detalle de cada asiento';
