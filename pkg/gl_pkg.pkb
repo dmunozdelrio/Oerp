@@ -56,7 +56,7 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
 
   PROCEDURE add_line(
     p_glh_id        IN gl_lines.glh_id%TYPE,
-    p_account_code  IN gl_lines.account_code%TYPE,  -- se recibe el valor de cuenta
+    p_account_id  IN gl_lines.account_id%TYPE,  -- se recibe el valor de cuenta
     p_post_key      IN gl_lines.post_key%TYPE,
     p_cost_center   IN gl_lines.cost_center%TYPE,
     p_tax_code      IN gl_lines.tax_code%TYPE,
@@ -98,7 +98,7 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
     VALUES(
       sq_gl_lines.NEXTVAL,
       p_glh_id,
-      p_account_code,   -- valor pasado a través de p_account_code
+      p_account_id,   -- valor pasado a través de p_account_id
       p_post_key,
       p_cost_center,
       p_tax_code,
@@ -221,19 +221,19 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
   ) IS
   BEGIN
     FOR r IN (
-      SELECT gll_id, account_code
+      SELECT gll_id, account_id
         FROM gl_lines
        WHERE glh_id = p_glh_id
     ) LOOP
       FOR s IN (
         SELECT segment_field
           FROM gl_split_rules
-         WHERE account_code = r.account_code
+         WHERE account_id = r.account_id
       ) LOOP
         INSERT INTO gl_lines(
           gll_id,
           glh_id,
-          account_code,
+          account_id,
           post_key,
           cost_center,
           tax_code,
@@ -243,7 +243,7 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
         VALUES(
           sq_gl_lines.NEXTVAL,
           p_glh_id,
-          r.account_code,
+          r.account_id,
           'SPLIT',
           s.segment_field,
           NULL,
@@ -272,7 +272,7 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
         INSERT INTO gl_lines(
           gll_id,
           glh_id,
-          account_code,
+          account_id,
           post_key,
           cost_center,
           tax_code,
@@ -282,7 +282,7 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
         VALUES(
           sq_gl_lines.NEXTVAL,
           h.glh_id,
-          l.account_code,
+          l.account_id,
           l.post_key,
           l.cost_center,
           l.tax_code,

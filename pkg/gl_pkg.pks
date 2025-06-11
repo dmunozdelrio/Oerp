@@ -11,7 +11,7 @@ CREATE OR REPLACE PACKAGE gl_pkg AS
 
   PROCEDURE add_line(
                       p_glh_id       IN gl_lines.glh_id%TYPE,
-                      p_account_code IN gl_lines.account_code%TYPE,  -- se recibe el valor de cuenta
+                      p_account_id   IN gl_lines.account_id%TYPE,  -- se recibe el valor de cuenta
                       p_post_key     IN gl_lines.post_key%TYPE,
                       p_cost_center  IN gl_lines.cost_center%TYPE,
                       p_tax_code     IN gl_lines.tax_code%TYPE,
