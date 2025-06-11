@@ -21,6 +21,14 @@ CREATE INDEX idx_gl_lines_account ON gl_lines(account_code);
 
 ALTER TABLE gl_header ADD CONSTRAINT fk_glh_state FOREIGN KEY (glh_state)
     REFERENCES gl_workflow_states(state_id);
+ALTER TABLE gl_header ADD CONSTRAINT fk_glh_tax_code FOREIGN KEY (tax_code)
+    REFERENCES tax_codes(tax_code);
+ALTER TABLE gl_header ADD CONSTRAINT fk_glh_period
+  FOREIGN KEY (period_id)
+  REFERENCES gl_periods(period_id);
+ALTER TABLE gl_lines ADD CONSTRAINT fk_gll_post_key
+  FOREIGN KEY (post_key)
+  REFERENCES gl_post_keys(key_id);
 CREATE INDEX idx_gl_header_period ON gl_header(period_id);
 CREATE INDEX idx_gl_header_state ON gl_header(glh_state);
 

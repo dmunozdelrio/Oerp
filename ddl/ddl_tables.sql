@@ -12,18 +12,20 @@ CREATE TABLE gl_header (
     approver         VARCHAR2(50),
     approval_date    DATE,
     period_id        NUMBER         NOT NULL,
-    status           CHAR(1)        DEFAULT 'B'
+    status           CHAR(1)        DEFAULT 'B',
+    tax_code         VARCHAR2(10)
 );
 
+
 CREATE TABLE gl_accounts (
-    account_code  VARCHAR2(30) PRIMARY KEY,
-    description   VARCHAR2(100),
-    account_type  VARCHAR2(20),
-    account_group VARCHAR2(30),
-    currency      VARCHAR2(3),
-    tax_code      VARCHAR2(10),
+    account_code    VARCHAR2(30) PRIMARY KEY,
+    description     VARCHAR2(100),
+    account_type    VARCHAR2(20),
+    account_group   VARCHAR2(30),
+    currency        VARCHAR2(3),
+    tax_code        VARCHAR2(10),
     withholding_rule NUMBER,
-    status        CHAR(1) CHECK (status IN ('A', 'I')) DEFAULT 'A'
+    status          CHAR(1) DEFAULT 'A' CHECK (status IN ('A','I'))
 );
 
 CREATE TABLE gl_lines (
@@ -112,16 +114,22 @@ CREATE TABLE users (
 
 -- Tabla GL_HEADER
 COMMENT ON TABLE gl_header IS 'Encabezados de asientos contables';
-COMMENT ON COLUMN gl_header.header_id IS 'PK: Identificador único del encabezado';
-COMMENT ON COLUMN gl_header.entry_date IS 'Fecha de contabilización del asiento';
+COMMENT ON COLUMN gl_header.glh_id IS 'PK: Identificador único del encabezado';
+COMMENT ON COLUMN gl_header.doc_type IS 'Tipo de documento';
+COMMENT ON COLUMN gl_header.doc_no IS 'Número de documento';
+COMMENT ON COLUMN gl_header.glh_exchange_rate IS 'Tipo de cambio';
+COMMENT ON COLUMN gl_header.glh_state IS 'Estado del encabezado';
+COMMENT ON COLUMN gl_header.approver IS 'Usuario que aprueba';
+COMMENT ON COLUMN gl_header.approval_date IS 'Fecha de aprobación';
 COMMENT ON COLUMN gl_header.period_id IS 'FK a gl_periods para el periodo contable';
+COMMENT ON COLUMN gl_header.status IS 'Estado: B= Borrador, A= Aprobado';
+COMMENT ON COLUMN gl_header.tax_code IS 'Código de impuesto asociado al encabezado';
 
 -- Tabla GL_LINES
 COMMENT ON TABLE gl_lines IS 'Líneas de detalle de cada asiento';
 COMMENT ON COLUMN gl_lines.line_id IS 'PK: Identificador único de la línea';
 COMMENT ON COLUMN gl_lines.header_id IS 'FK a gl_header para relacionar líneas';
 COMMENT ON COLUMN gl_lines.account_id IS 'FK a la cuenta contable afectada';
-COMMENT ON COLUMN gl_lines.amount IS 'Importe debitado o acreditado';
 
 -- Tabla GL_PERIODS
 COMMENT ON TABLE gl_periods IS 'Periodos contables con estado abierto o cerrado';
