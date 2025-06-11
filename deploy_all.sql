@@ -2,8 +2,10 @@
 -- Author  : Codex
 -- Date    : 2024-06-01
 -- Version : 1.0
-
+-- 0 delete all objects before deployment
+@ddl/dd_drop.sql
 -- 1. Tables
+
 @ddl/ddl_tables.sql
 
 -- 2. Sequences
