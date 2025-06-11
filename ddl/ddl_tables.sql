@@ -14,12 +14,16 @@ CREATE TABLE gl_header (
     period_id        NUMBER         NOT NULL,
     status           CHAR(1)        DEFAULT 'B',
     tax_code         VARCHAR2(10),
-    tax_rate         NUMBER(5,2)
+    tax_rate         NUMBER(5,2),
+    glh_date        DATE DEFAULT SYSDATE,
+    glh_description VARCHAR2(200)
+
 );
 
 
 CREATE TABLE gl_accounts (
-    account_code    VARCHAR2(30) PRIMARY KEY,
+    account_id      NUMBER           PRIMARY KEY,
+    account_code    VARCHAR2(30)     UNIQUE,
     description     VARCHAR2(100),
     account_type    VARCHAR2(20),
     account_group   VARCHAR2(30),
@@ -32,8 +36,7 @@ CREATE TABLE gl_accounts (
 CREATE TABLE gl_lines (
     gll_id        NUMBER        PRIMARY KEY,
     glh_id        NUMBER        NOT NULL,
-    account_id    VARCHAR2(30)  NOT NULL,
-    account_code  VARCHAR2(30)  NOT NULL,
+    account_id    NUMBER        NOT NULL,
     post_key      VARCHAR2(10)  NOT NULL,
     cost_center   VARCHAR2(30),
     tax_code      VARCHAR2(10),
@@ -53,12 +56,12 @@ CREATE TABLE gl_post_keys (
     description      VARCHAR2(100),
     dr_cr_flag       CHAR(1) CHECK (dr_cr_flag IN ('D','C')),
     mandatory_fields VARCHAR2(200),
-    account_code     VARCHAR2(30)
+    account_id       NUMBER  -- se sustituyó account_code (VARCHAR2) por account_id de tipo NUMBER
 );
 
 CREATE TABLE gl_split_rules (
     rule_id      NUMBER PRIMARY KEY,
-    account_code VARCHAR2(30),
+    account_id   NUMBER,  -- se sustituyó account_code (VARCHAR2) por account_id de tipo NUMBER
     segment_field VARCHAR2(30)
 );
 
@@ -129,9 +132,9 @@ COMMENT ON COLUMN gl_header.tax_rate IS 'Tasa del impuesto copiada del catálogo
 
 -- Tabla GL_LINES
 COMMENT ON TABLE gl_lines IS 'Líneas de detalle de cada asiento';
-COMMENT ON COLUMN gl_lines.line_id IS 'PK: Identificador único de la línea';
-COMMENT ON COLUMN gl_lines.header_id IS 'FK a gl_header para relacionar líneas';
-COMMENT ON COLUMN gl_lines.account_id IS 'FK a la cuenta contable afectada';
+COMMENT ON COLUMN gl_lines.gll_id IS 'PK: Identificador único de la línea';
+COMMENT ON COLUMN gl_lines.glh_id IS 'FK a gl_header para relacionar líneas';
+COMMENT ON COLUMN gl_lines.account_id IS 'FK a gl_accounts para identificar la cuenta involucrada';
 
 -- Tabla GL_PERIODS
 COMMENT ON TABLE gl_periods IS 'Periodos contables con estado abierto o cerrado';
@@ -142,7 +145,8 @@ COMMENT ON COLUMN gl_periods.status IS 'Estado: O=Open, C=Closed';
 
 -- Tabla GL_ACCOUNTS
 COMMENT ON TABLE gl_accounts IS 'Cuentas contables definidas en el sistema';
-COMMENT ON COLUMN gl_accounts.account_code IS 'PK: Código único de la cuenta';
+COMMENT ON COLUMN gl_accounts.account_id IS 'PK: Identificador único de la cuenta';
+COMMENT ON COLUMN gl_accounts.account_code IS 'Código externo único de la cuenta';
 COMMENT ON COLUMN gl_accounts.description IS 'Descripción de la cuenta contable';
 COMMENT ON COLUMN gl_accounts.account_type IS 'Tipo de cuenta (Activo, Pasivo, etc.)';
 COMMENT ON COLUMN gl_accounts.account_group IS 'Grupo contable al que pertenece la cuenta';
@@ -164,12 +168,12 @@ COMMENT ON COLUMN gl_post_keys.key_id IS 'PK: Identificador de la clave de conta
 COMMENT ON COLUMN gl_post_keys.description IS 'Descripción de la clave de contabilización';
 COMMENT ON COLUMN gl_post_keys.dr_cr_flag IS 'Indica si es Débito (D) o Crédito (C)';
 COMMENT ON COLUMN gl_post_keys.mandatory_fields IS 'Campos obligatorios para esta clave';
-COMMENT ON COLUMN gl_post_keys.account_code IS 'Código de la cuenta asociada a la clave';
+COMMENT ON COLUMN gl_post_keys.account_id IS 'FK a gl_accounts para identificar la cuenta asociada a la clave';
 
 -- Tabla GL_SPLIT_RULES
 COMMENT ON TABLE gl_split_rules IS 'Reglas para dividir cuentas en segmentos';
 COMMENT ON COLUMN gl_split_rules.rule_id IS 'PK: Identificador de la regla de división';
-COMMENT ON COLUMN gl_split_rules.account_code IS 'Código de la cuenta a dividir';
+COMMENT ON COLUMN gl_split_rules.account_id IS 'FK a gl_accounts para identificar la cuenta a dividir';
 COMMENT ON COLUMN gl_split_rules.segment_field IS 'Campo de segmento para la división';
 
 -- Tabla GL_WORKFLOW_STATES

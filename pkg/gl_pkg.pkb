@@ -56,7 +56,7 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
 
   PROCEDURE add_line(
     p_glh_id        IN gl_lines.glh_id%TYPE,
-    p_account_code  IN gl_lines.account_code%TYPE,
+    p_account_code  IN gl_lines.account_code%TYPE,  -- se recibe el valor de cuenta
     p_post_key      IN gl_lines.post_key%TYPE,
     p_cost_center   IN gl_lines.cost_center%TYPE,
     p_tax_code      IN gl_lines.tax_code%TYPE,
@@ -88,7 +88,7 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
     INSERT INTO gl_lines(
       gll_id,
       glh_id,
-      account_code,
+      account_id,  -- se modifica para insertar en ACCOUNT_ID
       post_key,
       cost_center,
       tax_code,
@@ -98,7 +98,7 @@ CREATE OR REPLACE PACKAGE BODY gl_pkg AS
     VALUES(
       sq_gl_lines.NEXTVAL,
       p_glh_id,
-      p_account_code,
+      p_account_code,   -- valor pasado a través de p_account_code
       p_post_key,
       p_cost_center,
       p_tax_code,

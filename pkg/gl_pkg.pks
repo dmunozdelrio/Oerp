@@ -9,14 +9,16 @@ CREATE OR REPLACE PACKAGE gl_pkg AS
                         p_exchange_rate IN gl_header.glh_exchange_rate%TYPE,
                         p_glh_id        OUT gl_header.glh_id%TYPE);
 
-  PROCEDURE add_line(p_glh_id       IN gl_lines.glh_id%TYPE,
-                     p_account_code IN gl_lines.account_code%TYPE,
-                     p_post_key     IN gl_lines.post_key%TYPE,
-                     p_cost_center  IN gl_lines.cost_center%TYPE,
-                     p_tax_code     IN gl_lines.tax_code%TYPE,
-                     p_debit_amount IN gl_lines.debit_amount%TYPE,
-                     p_credit_amount IN gl_lines.credit_amount%TYPE);
-
+  PROCEDURE add_line(
+                      p_glh_id       IN gl_lines.glh_id%TYPE,
+                      p_account_code IN gl_lines.account_code%TYPE,  -- se recibe el valor de cuenta
+                      p_post_key     IN gl_lines.post_key%TYPE,
+                      p_cost_center  IN gl_lines.cost_center%TYPE,
+                      p_tax_code     IN gl_lines.tax_code%TYPE,
+                      p_debit_amount IN gl_lines.debit_amount%TYPE,
+                      p_credit_amount IN gl_lines.credit_amount%TYPE
+                      );
+                  
   PROCEDURE validate_header(p_glh_id IN gl_header.glh_id%TYPE);
   PROCEDURE post_journal(p_glh_id IN gl_header.glh_id%TYPE,
                          p_approver IN gl_header.approver%TYPE);
