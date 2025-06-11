@@ -1,5 +1,5 @@
 -- Purpose : Audit trigger for GL_HEADER
--- Author  : Codex
+-- Author  : DIEGO
 -- Date    : 2024-06-01
 -- Version : 1.0
 
@@ -8,14 +8,58 @@ AFTER INSERT OR UPDATE OR DELETE ON gl_header
 FOR EACH ROW
 BEGIN
   IF INSERTING THEN
-    INSERT INTO gl_change_log(log_id, table_name, operation, row_id_val, changed_by, changed_date)
-    VALUES(sq_gl_change_log.NEXTVAL, 'GL_HEADER', 'INSERT', :NEW.glh_id, USER, SYSDATE);
+    INSERT INTO gl_change_log(
+      log_id,
+      table_name,
+      operation,
+      row_id_val,
+      changed_by,
+      changed_date
+    )
+    VALUES(
+      sq_gl_change_log.NEXTVAL,
+      'GL_HEADER',
+      'INSERT',
+      :NEW.glh_id,
+      USER,
+      SYSDATE
+    );
+
   ELSIF UPDATING THEN
-    INSERT INTO gl_change_log(log_id, table_name, operation, row_id_val, changed_by, changed_date)
-    VALUES(sq_gl_change_log.NEXTVAL, 'GL_HEADER', 'UPDATE', :OLD.glh_id, USER, SYSDATE);
+    INSERT INTO gl_change_log(
+      log_id,
+      table_name,
+      operation,
+      row_id_val,
+      changed_by,
+      changed_date
+    )
+    VALUES(
+      sq_gl_change_log.NEXTVAL,
+      'GL_HEADER',
+      'UPDATE',
+      :OLD.glh_id,
+      USER,
+      SYSDATE
+    );
+
   ELSIF DELETING THEN
-    INSERT INTO gl_change_log(log_id, table_name, operation, row_id_val, changed_by, changed_date)
-    VALUES(sq_gl_change_log.NEXTVAL, 'GL_HEADER', 'DELETE', :OLD.glh_id, USER, SYSDATE);
+    INSERT INTO gl_change_log(
+      log_id,
+      table_name,
+      operation,
+      row_id_val,
+      changed_by,
+      changed_date
+    )
+    VALUES(
+      sq_gl_change_log.NEXTVAL,
+      'GL_HEADER',
+      'DELETE',
+      :OLD.glh_id,
+      USER,
+      SYSDATE
+    );
   END IF;
 END;
 /

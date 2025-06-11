@@ -1,5 +1,5 @@
 -- Purpose : Create core tables for Journal Entry
--- Author  : Codex
+-- Author  : Diego
 -- Date    : 2024-06-01
 -- Version : 1.0
 
@@ -13,6 +13,12 @@ CREATE TABLE gl_header (
     approval_date    DATE,
     period_id        NUMBER         NOT NULL,
     status           CHAR(1)        DEFAULT 'B'
+);
+
+CREATE TABLE gl_accounts (
+    account_code  VARCHAR2(30) PRIMARY KEY,
+    description   VARCHAR2(100),
+    account_type  VARCHAR2(20)
 );
 
 CREATE TABLE gl_lines (
