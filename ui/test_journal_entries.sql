@@ -1,5 +1,5 @@
 -- Purpose : Example PL/SQL to create and post journals per doc type
--- Author  : Codex
+-- Author  : Diego
 -- Date    : 2024-06-01
 -- Version : 1.0
 

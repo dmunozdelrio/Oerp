@@ -1,5 +1,5 @@
 -- Purpose : UI helpers package body
--- Author  : Codex
+-- Author  : Diego
 -- Date    : 2024-06-01
 -- Version : 1.0
 

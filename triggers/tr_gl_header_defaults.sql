@@ -1,5 +1,5 @@
 -- Purpose : Default values for GL_HEADER from reference tables
--- Author  : Codex
+-- Author  : Diego
 -- Date    : 2024-06-02
 -- Version : 1.0
 

@@ -1,5 +1,5 @@
 -- Purpose : Master deployment script for Journal Entry module
--- Author  : Codex
+-- Author  : Diego
 -- Date    : 2024-06-01
 -- Version : 1.0
 -- 0 delete all objects before deployment

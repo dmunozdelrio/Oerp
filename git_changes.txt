@@ -94,7 +94,7 @@ index 51c8a92..38e1ce5 100644
 --- a/deploy_all.sql
 +++ b/deploy_all.sql
 @@ -2,8 +2,10 @@
- -- Author  : Codex
+ -- Author  : Diego
  -- Date    : 2024-06-01
  -- Version : 1.0
 -
@@ -446,7 +446,7 @@ Merge: 2fe3e56 0bf73a6
 Author: Diego Munoz del rio <85699761+dmunozdelrio@users.noreply.github.com>
 Date:   Tue Jun 10 18:42:27 2025 -0600
 
-    Merge pull request #7 from dmunozdelrio/d4j2xb-codex/generate-oracle-11g-pl/sql-journal-entry-module-codebase
+    Merge pull request #7 from dmunozdelrio/d4j2xb-Diego/generate-oracle-11g-pl/sql-journal-entry-module-codebase
     
     Add gl_accounts table and chart of accounts
 
@@ -455,7 +455,7 @@ Merge: 781088a 2fe3e56
 Author: Diego Munoz del rio <85699761+dmunozdelrio@users.noreply.github.com>
 Date:   Tue Jun 10 18:41:58 2025 -0600
 
-    Merge branch 'main' into d4j2xb-codex/generate-oracle-11g-pl/sql-journal-entry-module-codebase
+    Merge branch 'main' into d4j2xb-Diego/generate-oracle-11g-pl/sql-journal-entry-module-codebase
 
 commit 781088a46beeee552979702f2fcefc6ebc412606
 Author: Diego Munoz del rio <85699761+dmunozdelrio@users.noreply.github.com>
@@ -470,7 +470,7 @@ index 0000000..4b34c8f
 +++ b/ddl/ddl_constraints.sql
 @@ -0,0 +1,25 @@
 +-- Purpose : Add constraints and indexes for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -501,7 +501,7 @@ index 0000000..93b828a
 +++ b/ddl/ddl_sequences.sql
 @@ -0,0 +1,10 @@
 +-- Purpose : Create sequences for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -517,7 +517,7 @@ index 0000000..468df1f
 +++ b/ddl/ddl_tables.sql
 @@ -0,0 +1,79 @@
 +-- Purpose : Create core tables for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -602,7 +602,7 @@ index 0000000..e12933a
 +++ b/ddl/ddl_views.sql
 @@ -0,0 +1,14 @@
 +-- Purpose : Create views for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -622,7 +622,7 @@ index 0000000..f805423
 +++ b/ddl/seed_data.sql
 @@ -0,0 +1,43 @@
 +-- Purpose : Seed lookup tables
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -671,7 +671,7 @@ index 0000000..51c8a92
 +++ b/deploy_all.sql
 @@ -0,0 +1,36 @@
 +-- Purpose : Master deployment script for Journal Entry module
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -713,7 +713,7 @@ index 0000000..96ef6d7
 +++ b/jobs/reverse_job.sql
 @@ -0,0 +1,15 @@
 +-- Purpose : Scheduler job to reverse journal entries
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -734,7 +734,7 @@ index 0000000..9e3448f
 +++ b/pkg/gl_pkg.pkb
 @@ -0,0 +1,115 @@
 +-- Purpose : Core business package body for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -855,7 +855,7 @@ index 0000000..1dc64ce
 +++ b/pkg/gl_pkg.pks
 @@ -0,0 +1,26 @@
 +-- Purpose : Core business package spec for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -887,7 +887,7 @@ index 0000000..79d1af0
 +++ b/pkg/gl_report_pkg.pkb
 @@ -0,0 +1,18 @@
 +-- Purpose : Reporting package body
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -911,7 +911,7 @@ index 0000000..bc8cea9
 +++ b/pkg/gl_report_pkg.pks
 @@ -0,0 +1,10 @@
 +-- Purpose : Reporting package spec
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -927,7 +927,7 @@ index 0000000..f6c716d
 +++ b/pkg/gl_tax_pkg.pkb
 @@ -0,0 +1,17 @@
 +-- Purpose : Tax calculation package body
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -950,7 +950,7 @@ index 0000000..40f1b02
 +++ b/pkg/gl_tax_pkg.pks
 @@ -0,0 +1,9 @@
 +-- Purpose : Tax calculation package spec
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -965,7 +965,7 @@ index 0000000..11bd02d
 +++ b/pkg/gl_ui_pkg.pkb
 @@ -0,0 +1,19 @@
 +-- Purpose : UI helpers package body
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -990,7 +990,7 @@ index 0000000..f1d38f9
 +++ b/pkg/gl_ui_pkg.pks
 @@ -0,0 +1,10 @@
 +-- Purpose : UI helpers package spec
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1006,7 +1006,7 @@ index 0000000..2631d2a
 +++ b/triggers/tr_gl_header_log.sql
 @@ -0,0 +1,21 @@
 +-- Purpose : Audit trigger for GL_HEADER
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1033,7 +1033,7 @@ index 0000000..07cd0ae
 +++ b/triggers/tr_gl_lines_log.sql
 @@ -0,0 +1,21 @@
 +-- Purpose : Audit trigger for GL_LINES
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1060,7 +1060,7 @@ index 0000000..d585efa
 +++ b/ui/test_journal_entries.sql
 @@ -0,0 +1,38 @@
 +-- Purpose : Example PL/SQL to create and post journals per doc type
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1103,7 +1103,7 @@ Merge: e3d612b 8cfeb69
 Author: Diego Munoz del rio <85699761+dmunozdelrio@users.noreply.github.com>
 Date:   Tue Jun 10 17:52:37 2025 -0600
 
-    Merge pull request #6 from dmunozdelrio/codex/allow-start-date-and-repeat_interval-parameters
+    Merge pull request #6 from dmunozdelrio/Diego/allow-start-date-and-repeat_interval-parameters
     
     Parameterize scheduler job
 
@@ -1145,7 +1145,7 @@ Merge: ac4e37a 0521493
 Author: Diego Munoz del rio <85699761+dmunozdelrio@users.noreply.github.com>
 Date:   Tue Jun 10 17:49:37 2025 -0600
 
-    Merge pull request #5 from dmunozdelrio/codex/modify-init_header-with-new-sequences
+    Merge pull request #5 from dmunozdelrio/Diego/modify-init_header-with-new-sequences
     
     Update init_header sequences
 
@@ -1184,7 +1184,7 @@ Merge: 07284e7 097af59
 Author: Diego Munoz del rio <85699761+dmunozdelrio@users.noreply.github.com>
 Date:   Tue Jun 10 17:46:05 2025 -0600
 
-    Merge pull request #4 from dmunozdelrio/codex/enhance-validate_header-function
+    Merge pull request #4 from dmunozdelrio/Diego/enhance-validate_header-function
     
     Add enhanced header validations
 
@@ -1260,7 +1260,7 @@ Merge: d34cc9f 29a2cb8
 Author: Diego Munoz del rio <85699761+dmunozdelrio@users.noreply.github.com>
 Date:   Tue Jun 10 17:40:21 2025 -0600
 
-    Merge pull request #3 from dmunozdelrio/codex/update-gl_change_log-inserts-to-use-sq_gl_change_log.nextval
+    Merge pull request #3 from dmunozdelrio/Diego/update-gl_change_log-inserts-to-use-sq_gl_change_log.nextval
     
     Use correct sequence in GL header trigger
 
@@ -1297,7 +1297,7 @@ Merge: 325d440 74f3287
 Author: Diego Munoz del rio <85699761+dmunozdelrio@users.noreply.github.com>
 Date:   Tue Jun 10 17:36:18 2025 -0600
 
-    Merge pull request #2 from dmunozdelrio/codex/replace-not-exists-with-select-count-logic
+    Merge pull request #2 from dmunozdelrio/Diego/replace-not-exists-with-select-count-logic
     
     Refactor validation to use COUNT check
 
@@ -1335,7 +1335,7 @@ Merge: e0840a0 ad1f7eb
 Author: Diego Munoz del rio <85699761+dmunozdelrio@users.noreply.github.com>
 Date:   Tue Jun 10 17:21:31 2025 -0600
 
-    Merge pull request #1 from dmunozdelrio/codex/generate-oracle-11g-pl/sql-journal-entry-module-codebase
+    Merge pull request #1 from dmunozdelrio/Diego/generate-oracle-11g-pl/sql-journal-entry-module-codebase
     
     Add journal entry module SQL scripts
 
@@ -1352,7 +1352,7 @@ index 0000000..33877dd
 +++ b/ddl/ddl_constraints.sql
 @@ -0,0 +1,21 @@
 +-- Purpose : Add constraints and indexes for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1379,7 +1379,7 @@ index 0000000..93b828a
 +++ b/ddl/ddl_sequences.sql
 @@ -0,0 +1,10 @@
 +-- Purpose : Create sequences for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1395,7 +1395,7 @@ index 0000000..9c0f57e
 +++ b/ddl/ddl_tables.sql
 @@ -0,0 +1,73 @@
 +-- Purpose : Create core tables for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1474,7 +1474,7 @@ index 0000000..e12933a
 +++ b/ddl/ddl_views.sql
 @@ -0,0 +1,14 @@
 +-- Purpose : Create views for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1494,7 +1494,7 @@ index 0000000..c6ebc75
 +++ b/ddl/seed_data.sql
 @@ -0,0 +1,23 @@
 +-- Purpose : Seed lookup tables
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1523,7 +1523,7 @@ index 0000000..51c8a92
 +++ b/deploy_all.sql
 @@ -0,0 +1,36 @@
 +-- Purpose : Master deployment script for Journal Entry module
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1565,7 +1565,7 @@ index 0000000..96ef6d7
 +++ b/jobs/reverse_job.sql
 @@ -0,0 +1,15 @@
 +-- Purpose : Scheduler job to reverse journal entries
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1586,7 +1586,7 @@ index 0000000..9e3448f
 +++ b/pkg/gl_pkg.pkb
 @@ -0,0 +1,115 @@
 +-- Purpose : Core business package body for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1707,7 +1707,7 @@ index 0000000..1dc64ce
 +++ b/pkg/gl_pkg.pks
 @@ -0,0 +1,26 @@
 +-- Purpose : Core business package spec for Journal Entry
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1739,7 +1739,7 @@ index 0000000..79d1af0
 +++ b/pkg/gl_report_pkg.pkb
 @@ -0,0 +1,18 @@
 +-- Purpose : Reporting package body
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1763,7 +1763,7 @@ index 0000000..bc8cea9
 +++ b/pkg/gl_report_pkg.pks
 @@ -0,0 +1,10 @@
 +-- Purpose : Reporting package spec
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1779,7 +1779,7 @@ index 0000000..f6c716d
 +++ b/pkg/gl_tax_pkg.pkb
 @@ -0,0 +1,17 @@
 +-- Purpose : Tax calculation package body
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1802,7 +1802,7 @@ index 0000000..40f1b02
 +++ b/pkg/gl_tax_pkg.pks
 @@ -0,0 +1,9 @@
 +-- Purpose : Tax calculation package spec
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1817,7 +1817,7 @@ index 0000000..11bd02d
 +++ b/pkg/gl_ui_pkg.pkb
 @@ -0,0 +1,19 @@
 +-- Purpose : UI helpers package body
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1842,7 +1842,7 @@ index 0000000..f1d38f9
 +++ b/pkg/gl_ui_pkg.pks
 @@ -0,0 +1,10 @@
 +-- Purpose : UI helpers package spec
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1858,7 +1858,7 @@ index 0000000..2631d2a
 +++ b/triggers/tr_gl_header_log.sql
 @@ -0,0 +1,21 @@
 +-- Purpose : Audit trigger for GL_HEADER
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
@@ -1885,7 +1885,7 @@ index 0000000..07cd0ae
 +++ b/triggers/tr_gl_lines_log.sql
 @@ -0,0 +1,21 @@
 +-- Purpose : Audit trigger for GL_LINES
-+-- Author  : Codex
++-- Author  : Diego
 +-- Date    : 2024-06-01
 +-- Version : 1.0
 +
