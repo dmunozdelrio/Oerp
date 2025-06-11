@@ -23,3 +23,26 @@ ALTER TABLE gl_header ADD CONSTRAINT fk_glh_state FOREIGN KEY (glh_state)
     REFERENCES gl_workflow_states(state_id);
 CREATE INDEX idx_gl_header_period ON gl_header(period_id);
 CREATE INDEX idx_gl_header_state ON gl_header(glh_state);
+
+ALTER TABLE gl_accounts ADD CONSTRAINT chk_account_status CHECK (status IN ('A', 'I'));
+ALTER TABLE gl_accounts ADD CONSTRAINT fk_account_currency FOREIGN KEY (currency)
+    REFERENCES currencies(currency_code);
+
+ALTER TABLE gl_accounts ADD CONSTRAINT fk_account_tax_code FOREIGN KEY (tax_code)
+    REFERENCES tax_codes(tax_code);
+
+ALTER TABLE gl_accounts ADD CONSTRAINT fk_account_withholding_rule FOREIGN KEY (withholding_rule)
+    REFERENCES withholding_rules(rule_id);
+
+ALTER TABLE gl_post_keys ADD CONSTRAINT chk_dr_cr_flag CHECK (dr_cr_flag IN ('D', 'C'));
+ALTER TABLE gl_post_keys ADD CONSTRAINT fk_post_key_account FOREIGN KEY (account_code)
+    REFERENCES gl_accounts(account_code);
+ALTER TABLE gl_split_rules ADD CONSTRAINT fk_split_rule_account FOREIGN KEY (account_code)
+    REFERENCES gl_accounts(account_code);
+ALTER TABLE gl_split_rules ADD CONSTRAINT fk_split_rule_segment FOREIGN KEY (segment_field)
+    REFERENCES gl_segments(segment_id);
+
+ALTER TABLE gl_workflow_states ADD CONSTRAINT chk_state_status CHECK (status IN ('A', 'I'));
+ALTER TABLE gl_workflow_states ADD CONSTRAINT fk_state_approver FOREIGN KEY (approver)
+    REFERENCES users(user_id);
+

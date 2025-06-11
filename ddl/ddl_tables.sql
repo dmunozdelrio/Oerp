@@ -49,7 +49,8 @@ CREATE TABLE gl_post_keys (
     key_id           VARCHAR2(10) PRIMARY KEY,
     description      VARCHAR2(100),
     dr_cr_flag       CHAR(1) CHECK (dr_cr_flag IN ('D','C')),
-    mandatory_fields VARCHAR2(200)
+    mandatory_fields VARCHAR2(200),
+    account_code     VARCHAR2(30)
 );
 
 CREATE TABLE gl_split_rules (
@@ -60,7 +61,9 @@ CREATE TABLE gl_split_rules (
 
 CREATE TABLE gl_workflow_states (
     state_id    VARCHAR2(10) PRIMARY KEY,
-    description VARCHAR2(100)
+    description VARCHAR2(100),
+    status      CHAR(1)    DEFAULT 'A' CHECK(status IN('A','I')),
+    approver    VARCHAR2(50)
 );
 
 CREATE TABLE tax_codes (
@@ -89,6 +92,22 @@ CREATE TABLE gl_periods (
     start_date DATE,
     end_date DATE,
     status CHAR(1) -- 'O' for open, 'C' for closed
+);
+
+CREATE TABLE currencies (
+  currency_code VARCHAR2(3) PRIMARY KEY,
+  description   VARCHAR2(50)
+);
+
+CREATE TABLE gl_segments (
+  segment_id   VARCHAR2(30) PRIMARY KEY,
+  description  VARCHAR2(100)
+);
+
+CREATE TABLE users (
+  user_id    VARCHAR2(50) PRIMARY KEY,
+  username   VARCHAR2(50),
+  full_name  VARCHAR2(100)
 );
 
 -- Tabla GL_HEADER
@@ -135,6 +154,7 @@ COMMENT ON COLUMN gl_post_keys.key_id IS 'PK: Identificador de la clave de conta
 COMMENT ON COLUMN gl_post_keys.description IS 'Descripción de la clave de contabilización';
 COMMENT ON COLUMN gl_post_keys.dr_cr_flag IS 'Indica si es Débito (D) o Crédito (C)';
 COMMENT ON COLUMN gl_post_keys.mandatory_fields IS 'Campos obligatorios para esta clave';
+COMMENT ON COLUMN gl_post_keys.account_code IS 'Código de la cuenta asociada a la clave';
 
 -- Tabla GL_SPLIT_RULES
 COMMENT ON TABLE gl_split_rules IS 'Reglas para dividir cuentas en segmentos';
@@ -146,6 +166,8 @@ COMMENT ON COLUMN gl_split_rules.segment_field IS 'Campo de segmento para la div
 COMMENT ON TABLE gl_workflow_states IS 'Estados del flujo de trabajo para aprobaciones';
 COMMENT ON COLUMN gl_workflow_states.state_id IS 'PK: Identificador del estado';
 COMMENT ON COLUMN gl_workflow_states.description IS 'Descripción del estado del flujo de trabajo';
+COMMENT ON COLUMN gl_workflow_states.status IS 'Estado del flujo de trabajo: A=Activo, I=Inactivo';
+COMMENT ON COLUMN gl_workflow_states.approver IS 'Usuario encargado de aprobar el flujo';
 
 -- Tabla TAX_CODES
 COMMENT ON TABLE tax_codes IS 'Códigos de impuestos aplicables a las cuentas';
