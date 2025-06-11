@@ -4,7 +4,7 @@
 -- Version : 1.0
 
 CREATE TABLE gl_header (
-    glh_id           NUMBER         PRIMARY KEY,
+    glh_id           NUMBER            PRIMARY KEY,
     doc_type         VARCHAR2(10)   NOT NULL,
     doc_no           NUMBER,
     glh_exchange_rate NUMBER(10,5),
