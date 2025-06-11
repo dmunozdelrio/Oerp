@@ -1,5 +1,5 @@
 -- Purpose : Create core tables for Journal Entry
--- Author  : Codex
+-- Author  : Diego
 -- Date    : 2024-06-01
 -- Version : 1.0
 
