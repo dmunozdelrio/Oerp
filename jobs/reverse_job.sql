@@ -23,7 +23,7 @@ BEGIN
         END;
       ]',
       start_date      => &START_DATE,
-      repeat_interval => &REPEAT_INTERVAL,
+      repeat_interval => '&REPEAT_INTERVAL',
       enabled         => TRUE
   );
 END;

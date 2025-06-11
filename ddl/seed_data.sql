@@ -41,3 +41,6 @@ INSERT INTO gl_accounts(account_code, description, account_type) VALUES('5100', 
 INSERT INTO gl_accounts(account_code, description, account_type) VALUES('5200', 'Software Development Expense', 'EXPENSE');
 INSERT INTO gl_accounts(account_code, description, account_type) VALUES('5300', 'Marketing Expense', 'EXPENSE');
 INSERT INTO gl_accounts(account_code, description, account_type) VALUES('5400', 'General & Administrative Expense', 'EXPENSE');
+
+INSERT INTO gl_periods(period_id, start_date, end_date, status)
+VALUES(202401, DATE '2024-01-01', DATE '2024-01-31', 'O');

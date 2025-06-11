@@ -77,3 +77,10 @@ CREATE TABLE gl_change_log (
     changed_by   VARCHAR2(50),
     changed_date DATE
 );
+
+CREATE TABLE gl_periods (
+    period_id NUMBER PRIMARY KEY,
+    start_date DATE,
+    end_date DATE,
+    status CHAR(1) -- 'O' for open, 'C' for closed
+);
